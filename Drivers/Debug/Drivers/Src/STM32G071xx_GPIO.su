@@ -1,0 +1,8 @@
+STM32G071xx_GPIO.c:10:6:GPIO_Init	16	static
+STM32G071xx_GPIO.c:14:6:GPIO_DeInit	16	static
+STM32G071xx_GPIO.c:18:6:GPIO_PCLKControl	16	static
+STM32G071xx_GPIO.c:72:9:GPIO_ReadPin	16	static
+STM32G071xx_GPIO.c:76:10:GPIO_ReadPort	16	static
+STM32G071xx_GPIO.c:80:9:GPIO_WritePin	16	static
+STM32G071xx_GPIO.c:84:10:GPIO_WritePort	16	static
+STM32G071xx_GPIO.c:88:6:GPIO_TglPin	16	static
