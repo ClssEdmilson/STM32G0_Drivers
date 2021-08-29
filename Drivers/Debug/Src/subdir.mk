@@ -21,10 +21,6 @@ C_DEPS += \
 
 
 # Each subdirectory must supply rules for building sources it contributes
-Src/main.o: ../Src/main.c Src/subdir.mk
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DSTM32G071RBTx -DSTM32 -DSTM32G0 -DNUCLEO_G071RB -c -I../Inc -I"C:/Users/edmil/Documents/Programming/STM32G0_Drivers/Drivers/Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
-Src/syscalls.o: ../Src/syscalls.c Src/subdir.mk
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DSTM32G071RBTx -DSTM32 -DSTM32G0 -DNUCLEO_G071RB -c -I../Inc -I"C:/Users/edmil/Documents/Programming/STM32G0_Drivers/Drivers/Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/syscalls.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
-Src/sysmem.o: ../Src/sysmem.c Src/subdir.mk
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DSTM32G071RBTx -DSTM32 -DSTM32G0 -DNUCLEO_G071RB -c -I../Inc -I"C:/Users/edmil/Documents/Programming/STM32G0_Drivers/Drivers/Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/sysmem.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
+Src/%.o: ../Src/%.c Src/subdir.mk
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DSTM32G071RBTx -DSTM32 -DSTM32G0 -DNUCLEO_G071RB -c -I../Inc -I"C:/Users/edmil/Documents/Programming/STM32G0_Drivers/Drivers/Drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 

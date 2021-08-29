@@ -20,7 +20,29 @@
 
 #include "STM32G071xx.h"
 
+void delay(void){
+	for(uint32_t i = 0; i < 500000; i++);
+}
+
+
 int main(void)
 {
+
+	GPIO_Handle_t Led;
+
+	Led.pGPIOx = GPIOA;
+	Led.GPIOPinConfig.GPIO_PinNumber = GPIO_PIN_5;
+	Led.GPIOPinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+	Led.GPIOPinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+	Led.GPIOPinConfig.GPIO_PinOPType = GPIO_OUT_PP;
+
+
+	GPIO_PCLKControl(GPIOA, ENABLE);
+	GPIO_Init(&Led);
+
+	while(1){
+		GPIO_TglPin(GPIOA, GPIO_PIN_5);
+		delay();
+	};
 
 }

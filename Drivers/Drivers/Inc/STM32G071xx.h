@@ -15,6 +15,14 @@
 #define BitFlp(arg, bit) 	((arg) ^=  (1 << bit))
 #define BitTst(arg, bit) 	((arg) &   (1 << bit))
 
+#define Bit2Write(reg, value, position)	((reg) |=  (value << (2 * position)))
+
+#define BitWrite(reg, value, position)	((reg) |=  (value << (1 * position)))
+#define Bit2Clr(reg, position)			((reg) &= ~(3 << (2 * position)))
+
+#define BiteWrite(reg, value, position)	((reg) |=  (value << (4 * position)))
+
+
 /*
  * Memory addresses
  */
@@ -32,7 +40,7 @@
 #define PERIPH_BASEADDR			0x40000000U
 #define APBPERIPH_BASEADDR		PERIPH_BASEADDR
 #define AHBPERIPH_BASEADDR		0x40020000U
-#define IO_PORT_BASEADDR		AHBPERIPH_BASEADDR
+#define IO_PORT_BASEADDR		0x50000000U
 
 /*
  * AHB addresses peripherals
@@ -102,7 +110,7 @@
  * IO PORT addresses peripherals
  */
 
-#define GPIOA_BASEADDR			(IO_PORT_BASEADDR + 0x0000)
+#define GPIOA_BASEADDR			IO_PORT_BASEADDR
 #define GPIOB_BASEADDR			(IO_PORT_BASEADDR + 0x0400)
 #define GPIOC_BASEADDR			(IO_PORT_BASEADDR + 0x0800)
 #define GPIOD_BASEADDR			(IO_PORT_BASEADDR + 0x0C00)
@@ -177,12 +185,24 @@ typedef struct{
  */
 
 
-#define GPIOA_CLK_EN()	(RCC->IOPENR |= (1 << 0))
-#define GPIOB_CLK_EN()	(RCC->IOPENR |= (1 << 1))
-#define GPIOC_CLK_EN()	(RCC->IOPENR |= (1 << 2))
-#define GPIOD_CLK_EN()	(RCC->IOPENR |= (1 << 3))
-#define GPIOE_CLK_EN()	(RCC->IOPENR |= (1 << 4))
-#define GPIOF_CLK_EN()	(RCC->IOPENR |= (1 << 5))
+#define GPIOA_CLK_EN()	do{ (RCC->IOPENR &=  ~(1 << 0)); (RCC->IOPENR |= (1 << 0)); }while(0)
+#define GPIOB_CLK_EN()	do{ (RCC->IOPENR &=  ~(1 << 1)); (RCC->IOPENR |= (1 << 1)); }while(0)
+#define GPIOC_CLK_EN()	do{ (RCC->IOPENR &=  ~(1 << 2)); (RCC->IOPENR |= (1 << 2)); }while(0)
+#define GPIOD_CLK_EN()	do{ (RCC->IOPENR &=  ~(1 << 3)); (RCC->IOPENR |= (1 << 3)); }while(0)
+#define GPIOE_CLK_EN()	do{ (RCC->IOPENR &=  ~(1 << 4)); (RCC->IOPENR |= (1 << 4)); }while(0)
+#define GPIOF_CLK_EN()	do{ (RCC->IOPENR &=  ~(1 << 5)); (RCC->IOPENR |= (1 << 5)); }while(0)
+
+/*
+ * GPIO Reset
+ */
+
+
+#define GPIOA_RESET()	(RCC->IOPRSTR |= (1 << 0))
+#define GPIOB_RESET()	(RCC->IOPRSTR |= (1 << 1))
+#define GPIOC_RESET()	(RCC->IOPRSTR |= (1 << 2))
+#define GPIOD_RESET()	(RCC->IOPRSTR |= (1 << 3))
+#define GPIOE_RESET()	(RCC->IOPRSTR |= (1 << 4))
+#define GPIOF_RESET()	(RCC->IOPRSTR |= (1 << 5))
 
 
 /*
@@ -201,10 +221,13 @@ typedef struct{
  * Generic defines
  */
 
-#define ENABLE  1
-#define DISABLE 0
+#define ENABLE  01
+#define DISABLE 00
 #define SET		ENABLE
 #define RESET	DISABLE
+
+
+#include "STM32G071xx_GPIO.h"
 
 
 #endif /* INC_STM32G071XX_H_ */
